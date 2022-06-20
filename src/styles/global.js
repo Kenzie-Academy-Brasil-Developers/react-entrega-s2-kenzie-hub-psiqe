@@ -24,7 +24,7 @@ export default createGlobalStyle`
   }
 
   body {
- 
+    height: 100vh;
     background: var(--grey-4);
     display:flex;
     align-items: center;
@@ -42,5 +42,27 @@ export default createGlobalStyle`
   };
   a {
     text-decoration: none;
+  }
+
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #ff577f #121214;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 13px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #121214;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #ff577f;
+    border-radius: 10px;
+    border: 3px solid #121214;
   }
 `

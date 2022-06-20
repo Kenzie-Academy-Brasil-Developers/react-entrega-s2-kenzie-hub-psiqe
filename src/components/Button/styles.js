@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const StyledButton = muiStyles.styled(Button)`
 color: var(--grey-0);
-background: ${props => props.color ? props.color : 'var(--idPrimaryNegative)' } ;
+background: ${props => props.backgroundcolor} ;
 height: 48px;
 width: ${props => props.width ? props.width : '100%' };
 :hover {
