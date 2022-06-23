@@ -24,7 +24,6 @@ export default createGlobalStyle`
   }
 
   body {
-    height: 100vh;
     background: var(--grey-4);
     display:flex;
     align-items: center;

@@ -19,14 +19,16 @@ span{
 `
 
 export const StyledTextField = muiStyles.styled(TextField)`
-  margin-top: 20px;
-  margin-bottom:10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   input{
+    background: var(--grey-2);
+    opacity:0.7;
+    border-radius: 5px;
     color: var(--grey-0);
     border-color: var(--grey-1)
   }
   label{
-  
     color: var(--grey-1);
   }
   `

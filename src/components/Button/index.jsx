@@ -7,6 +7,5 @@ export const Button = ({children, color, ...rest})=>{
         {children}
       </StyledButton>
       </Container>
-  
   )
 };

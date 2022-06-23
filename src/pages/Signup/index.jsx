@@ -1,16 +1,22 @@
-import { Button } from "../../components/Button"
-import { Input } from "../../components/Input"
-import { Select } from "../../components/Select"
-
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { toast } from 'react-toastify';
+import { useState } from "react";
 import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Link } from "react-router-dom";
 
-import { Container, Content } from "./styles"
+import { Select } from "../../components/Select";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+import { api } from "../../services/api";
+import { Load } from "../../utils/Load";
+import { Container, Content } from "./styles";
 
 export const Signup =()=>{
+  const history = useHistory()
+  const [loading, setLoading] = useState(false)
+  const [age, setAge] = useState('status')
+
   const schema = yup.object().shape({
     name: yup.string().required("We need know your name!"),
     email: yup.string().required('We need know your email!').email('Invalid email!'),
@@ -20,17 +26,17 @@ export const Signup =()=>{
     confirmPassword: yup.string().oneOf([yup.ref('password')], 'Does not agree with password!'),
     bio: yup.string().required('Please, We want to know about you!'),
     contact: yup.string().required('We need contact to speak with you!'),
-    module: yup.string().required("You are studying right.. What's is your Module?"),
+    course_module: yup.string().required("You are studying right.. What's is your Module?"),
   })
 
   const modules = [
-    {label: 'First Module'},
-    {label: 'Second Module'},
-    {label: 'Third Module'},
-    {label: 'Fourth Module'},
-    {label: 'Fifth Module'},
-    {label: 'Sexth Module'},
-    {label: 'Seventh Module'},
+    {value: 'First Module'},
+    {value: 'Second Module'},
+    {value: 'Third Module'},
+    {value: 'Fourth Module'},
+    {value: 'Fifth Module'},
+    {value: 'Sexth Module'},
+    {value: 'Seventh Module'},
   ]
 
   const { 
@@ -41,18 +47,26 @@ export const Signup =()=>{
     resolver: yupResolver(schema)
   });
   
-  function inSubmit(data) {
-    console.log(data)
+  function onSubmit(data) {
+    api
+    .post('/users',data)
+    .then((resp) => {
+        setLoading(true)
+        toast.success('Nice, Welcome to Kenzie Hub Port.io!')
+        return history.push('/login')
+      } )
+      .catch(err => console.log(err))
   }
  
-  return(<Container>
+  return(
+    <Container>
       <Content>
         <div>
           <h1> Kenzie Hub </h1>
-          <Link to={'/login'}><Button width='70px'color='var(--idPrimaryNegative)'> Go to Login </Button></Link>
+          <Link to={'/login'}><Button width='70px' color='var(--idPrimaryNegative)'> Go to Login </Button></Link>
         </div>
     
-        <form onSubmit={handleSubmit(inSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h3>Create your account</h3>
           <p>Quick and easily, let's go!</p>
           
@@ -62,11 +76,12 @@ export const Signup =()=>{
           <Input name='confirmPassword' register={register} label='Confirm password' error={errors?.confirmPassword?.message} type='password'/>
           <Input name='bio' register={register} label='Bio' error={errors?.bio?.message}/>
           <Input name='contact' register={register} label='Contact' error={errors?.contact?.message} />
-          <Select name='module' register={register} label='Modules' options={modules} error={errors?.module?.message}/>
+          <Select name='course_module' register={register} label='Modules'  age={age} setAge={setAge} options={modules} error={errors?.module?.message}/>
 
           <Button type='submit' color='#59323F'> Register </Button>
         </form>
       </Content>
+      {loading && <Load/>}
     </Container>
   )
 }

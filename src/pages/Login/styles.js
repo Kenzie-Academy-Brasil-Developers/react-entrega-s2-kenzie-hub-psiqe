@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+height:100vh;
 display: flex;
 justify-content: center;
 flex-direction: column;
@@ -25,11 +26,11 @@ form {
     display:flex;
     justify-content:center;
     svg {
-    color: var(--idPrimaryNegative);
-    margin: 40px 0px 0px 85px;
-    position: absolute;
-    cursor: pointer;
-    z-index:1;
+      color: var(--idPrimaryNegative);
+      margin: 25px 0px 0px 85px;
+      position: absolute;
+      cursor: pointer;
+      z-index:1;
     :hover{
       color: var(--idPrimaryFocus);
       

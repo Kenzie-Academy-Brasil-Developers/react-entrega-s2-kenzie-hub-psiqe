@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-height: 100vh;
 margin: 10px 0;
 width: 100vw;
 display:flex;
@@ -28,13 +27,13 @@ export const Content = styled.div`
   }
   form{
     height: max-content;
-    width: 90%;
     background: var(--grey-3);
     display:flex;
     flex-direction: column;
     align-items:center;
     border-radius: 5px;
     margin: 10px 0;
+    padding: 15px;;
     h3{
       color: var(--grey-0);
       margin: 20px 0px 10px 0px;
