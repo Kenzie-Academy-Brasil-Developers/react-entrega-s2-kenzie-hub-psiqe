@@ -1,12 +1,17 @@
-import { Switch, Route } from "react-router-dom"
+import { Switch, Route, useHistory } from "react-router-dom"
 import { Dashboard } from "../pages/Dashboard"
 import Home from "../pages/Home"
 import { Login } from "../pages/Login"
 import { Signup } from "../pages/Signup"
 
+
 const Routes =()=>{
+  const history = useHistory()
   return <Switch>
     <Route exact path='/'>
+      {history.push('/home')}
+    </Route>
+    <Route exact path='/home'>
       <Home/>
     </Route>
     <Route exact path='/login'>
